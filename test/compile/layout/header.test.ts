@@ -1,9 +1,22 @@
 import {assert} from 'chai';
-import {getHeaderGroups, getTitleGroup} from '../../../src/compile/layout/header';
+import {getHeaderGroups, getTitleGroup, labelAlign, labelBaseline} from '../../../src/compile/layout/header';
 import {VgMarkGroup} from '../../../src/vega.schema';
 import {parseFacetModel} from '../../util';
 
 describe('compile/layout/header', () => {
+  describe('label aligns correctly according to angle', () => {
+    assert.deepEqual(labelAlign(23), {align: {value: 'right'}});
+    assert.deepEqual(labelAlign(135), {align: {value: 'left'}});
+    assert.deepEqual(labelAlign(50), {});
+  });
+
+  describe('label baseline adjusted according to angle', () => {
+    assert.deepEqual(labelBaseline(10), {baseline: {value: 'middle'}});
+    assert.deepEqual(labelBaseline(40), {baseline: {value: 'top'}});
+    assert.deepEqual(labelBaseline(270), {baseline: {value: 'top'}});
+    assert.deepEqual(labelBaseline(90), {});
+  });
+
   describe('getHeaderGroups', () => {
     const model = parseFacetModel({
       facet: {

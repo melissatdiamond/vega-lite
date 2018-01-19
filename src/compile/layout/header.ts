@@ -97,6 +97,30 @@ export function getHeaderGroups(model: Model, channel: HeaderChannel): VgMarkGro
   return groups;
 }
 
+export function labelAlign(angle: number) {
+  // to keep angle in [0, 360)
+  angle = ((angle % 360) + 360) % 360;
+  if (angle <= 45 || 270 < angle) {
+    return {align: {value: 'right'}};
+  } else if (135 <= angle && angle < 225) {
+    return {align: {value: 'left'}};
+  }
+  return {};
+}
+
+export function labelBaseline(angle: number) {
+  // to keep angle in [0, 360)
+  angle = ((angle % 360) + 360) % 360;
+  if (angle <= 22.5 || (225 <= angle && angle < 270)) {
+    return {baseline: {value: 'middle'}};
+  } else if ((22.5 < angle && angle <= 45) || (135 < angle && angle <= 180) || angle === 90) { // keep 90 and -90 at the same place
+    return {baseline: {value: 'top'}};
+  } else if ((180 < angle && angle <= 225) || 270 < angle) {
+    return {baseline: {value: 'bottom'}};
+  }
+  return {};
+}
+
 function getHeaderGroup(model: Model, channel: HeaderChannel, headerType: HeaderType, layoutHeader: LayoutHeaderComponent, headerCmpt: HeaderComponent) {
   if (headerCmpt) {
     let title = null;
@@ -108,7 +132,9 @@ function getHeaderGroup(model: Model, channel: HeaderChannel, headerType: Header
       const update = {
         ...(
           labelAngle !== undefined ? {angle: {value: labelAngle}} : {}
-        )
+        ),
+        ...labelAlign(labelAngle),
+        ...labelBaseline(labelAngle)
 
         // TODO(https://github.com/vega/vega-lite/issues/2446): apply label* (e.g, labelAlign, labelBaseline) here
       };
