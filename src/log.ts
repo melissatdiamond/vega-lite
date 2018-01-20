@@ -246,7 +246,7 @@ export namespace message {
   }
 
   export function mergeConflictingProperty<T>(property: string, propertyOf: string, v1: T, v2: T) {
-    return `Conflicting ${propertyOf} property "${property}" ("${v1}" and "${v2}").  Using "${v1}".`;
+    return `Conflicting ${propertyOf} property "${property}" ("${JSON.stringify(v1)}" and "${JSON.stringify(v2)}").  Using "${JSON.stringify(v1)}".`;
   }
 
   export function independentScaleMeansIndependentGuide(channel: Channel) {
