@@ -113,9 +113,9 @@ export function labelBaseline(angle: number) {
   angle = ((angle % 360) + 360) % 360;
   if (angle <= 22.5 || (225 <= angle && angle < 270)) {
     return {baseline: {value: 'middle'}};
-  } else if ((22.5 < angle && angle <= 45) || (135 < angle && angle <= 180) || angle === 90) { // keep 90 and -90 at the same place
+  } else if ((22.5 < angle && angle <= 45) || (120 < angle && angle <= 180) || angle === 90) { // keep 90 and -90 at the same place
     return {baseline: {value: 'top'}};
-  } else if ((180 < angle && angle <= 225) || 270 < angle) {
+  } else if ((180 < angle && angle <= 225) || 270 <= angle) {
     return {baseline: {value: 'bottom'}};
   }
   return {};

@@ -13,8 +13,8 @@ describe('compile/layout/header', () => {
   describe('label baseline adjusted according to angle', () => {
     assert.deepEqual(labelBaseline(10), {baseline: {value: 'middle'}});
     assert.deepEqual(labelBaseline(40), {baseline: {value: 'top'}});
-    assert.deepEqual(labelBaseline(270), {baseline: {value: 'top'}});
-    assert.deepEqual(labelBaseline(90), {});
+    assert.deepEqual(labelBaseline(270), {baseline: {value: 'bottom'}});
+    assert.deepEqual(labelBaseline(60), {});
   });
 
   describe('getHeaderGroups', () => {
