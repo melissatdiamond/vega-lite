@@ -37,9 +37,6 @@
                         {
                             "test": "datum.IMDB_Rating === null || datum.Rotten_Tomatoes_Rating === null",
                             "value": "#aaa"
-                        },
-                        {
-                            "value": "#0099ff"
                         }
                     ],
                     "fill": {
